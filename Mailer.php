@@ -10,6 +10,8 @@
  * @author Johnny
  */
 class Mailer {
+	const EOL = "\r\n";
+	
 	/** @var boolean 是否使用SMTP */
 	public $isSmtp = false;
 	
@@ -65,4 +67,23 @@ class Mailer {
 	
 	/** @var string 純文字替代內容 */
 	public $altBody = '';
+	
+	/**
+	 * @var array 檔案附件
+	 * @example [
+	 *    [檔案路徑 , optional 檔案名稱],[檔案路徑 , optional 檔案名稱]
+	 * ]
+	 */
+	public $attachments = array();
+	
+	/** @var string 錯誤訊息 */
+	public $errMsg = '';
+	
+	private $mixBoundaryId;
+	private	$mixBoundary ;
+	private	$mixBoundaryEnd;
+	private	$altBoundaryId;
+	private	$altBoundary;
+	private	$altBoundaryEnd ;
+
 }
