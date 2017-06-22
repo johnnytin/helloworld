@@ -50,4 +50,19 @@ class Mailer {
 	
 	/** @var array 密件副本 */
 	protected $bcc = array();
+	
+	/** @var string 語言編碼 */
+	public $charset = 'UTF-8';
+	
+	/** @var boolean 是否為html格式內容 */
+	public $isHTML = true;
+	
+	/** @var string 信件標題 */
+	protected $subject = 'No subject';
+	
+	/** @var string 內容 */
+	public $message = '';
+	
+	/** @var string 純文字替代內容 */
+	public $altBody = '';
 }
