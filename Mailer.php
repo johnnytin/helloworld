@@ -44,6 +44,9 @@ class Mailer {
 	
 	/**
 	 * @var array 收件人 
+	 * @example [
+	 *    [信箱],[信箱 <someone@somewhere.where>]
+	 * ]
 	 */
 	protected $to = array();
 	
