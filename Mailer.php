@@ -19,7 +19,7 @@ class Mailer {
 	public $smtpServer = 'localhost';
 	
 	/** @var integer SMTP Port */
-	public $port = 25;
+	public $smtpPort = 25;
 	
 	
 	/** @var boolean 是否使用帳號登入SMTP */
@@ -85,5 +85,34 @@ class Mailer {
 	private	$altBoundaryId;
 	private	$altBoundary;
 	private	$altBoundaryEnd ;
+	
+	function __construct() {
+		$this -> mixBoundaryId = 'mix_'.md5(microtime());
+		$this -> mixBoundary =  '--'.$this -> mixBoundaryId.$this -> EOL ;
+		$this -> mixBoundaryEnd =  '--'.$this -> mixBoundaryId.'--'.$this -> EOL ;
 
+		$this -> altBoundaryId = 'alt_'.md5(microtime(true));
+		$this -> altBoundary =  '--'.$this -> altBoundaryId.$this -> eol ;
+		$this -> altBoundaryEnd =  '--'.$this -> altBoundaryId.'--' .$this -> EOL ;
+	}
+	
+	/**
+	 * 使用SMTP送信並設定SMPT連線資料
+	 * @param string  $server  SMTP位置
+	 * @param integer $port  optional SMTP PORT
+	 * @param string  $username  optional SMTP帳號
+	 * @param string  $password  optional SMTP密碼
+	 * @access public
+	 */ 
+	function smtp($server , $port = 25 , $username = '' , $password = ''){
+		$this -> isSmtp = true;
+		$this -> smtpServer = $server;
+		$this -> smtpPort = $port;
+
+		if(!empty($username) && !empty($password) ){
+			$this -> auth = true;
+			$this -> username = $username;
+			$this -> password = $password;
+		}
+	}
 }
